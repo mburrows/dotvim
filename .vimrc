@@ -16,6 +16,7 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/VisIncr'
+Plugin 'chriskempson/base16-vim'
 call vundle#end()
 
 set nowrap               " turn off line wrapping, turn it back on with :Wrap
