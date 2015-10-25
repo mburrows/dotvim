@@ -46,7 +46,6 @@ set lazyredraw           " dont redraw whilst executing macros
 set mousehide
 set confirm
 
-
 " Change the mapleader from \ to ,
 let mapleader=","
 
