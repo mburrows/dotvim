@@ -1,4 +1,23 @@
-set nocompatible         " turn on all the bells and whistles
+" Use Vundle for plugin management
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'Vundle/Vundle.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/VisIncr'
+call vundle#end()
+
 set nowrap               " turn off line wrapping, turn it back on with :Wrap
 set backspace=indent,eol,start
 set nobackup             " don't create backup files (everything I edit is in version control)
@@ -26,8 +45,6 @@ set lazyredraw           " dont redraw whilst executing macros
 set mousehide
 set confirm
 
-" Use pathogen for plugins
-call pathogen#infect()
 
 " Change the mapleader from \ to ,
 let mapleader=","
