@@ -160,11 +160,6 @@ endif " has("autocmd")
 " Remap esc key for fast switching and ipad keyboards
 inoremap jj <Esc>
 
-" Snippet related settings
-let g:snips_author = 'Matt Burrows'
-nnoremap <leader>sr :call ReloadAllSnippets()<CR>
-nnoremap <leader>st :tabe ~/.vim/bundle/snipmate-snippets/snippets<CR>
-
 " Quick compile
 noremap <F1> :make debug -j48<CR>
 noremap <leader>1 :make debug -j48<CR>
