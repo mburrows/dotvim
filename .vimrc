@@ -19,6 +19,7 @@ Plugin 'vim-scripts/VisIncr'
 Plugin 'chriskempson/base16-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'benmills/vimux'
 call vundle#end()
 
 set nowrap               " turn off line wrapping, turn it back on with :Wrap
@@ -295,4 +296,12 @@ map <leader>j :CtrlPMixed<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
- 
+
+" Vimux shortcuts
+map <Leader>vc :call VimuxRunCommand("clear; cd ~/cpp && ./waf debug -j48")<CR>
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vi :VimuxInspectRunner<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
+map <Leader>vx :VimuxInterruptRunner<CR>
+map <Leader>vz :call VimuxZoomRunner()<CR>    
