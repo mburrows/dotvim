@@ -17,6 +17,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/VisIncr'
 Plugin 'chriskempson/base16-vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 call vundle#end()
 
 set nowrap               " turn off line wrapping, turn it back on with :Wrap
@@ -45,6 +47,8 @@ set viewdir=$HOME/.vim/views
 set lazyredraw           " dont redraw whilst executing macros
 set mousehide
 set confirm
+set relativenumber
+set number
 
 " Change the mapleader from \ to ,
 let mapleader=","
@@ -81,7 +85,6 @@ nnoremap Q gqap
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
     set mouse=a
-    set relativenumber
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
@@ -274,10 +277,6 @@ cnoremap <C-n> <Down>
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
-"let g:ycm_global_ycm_extra_conf = 0
-"nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>
-"nnoremap <leader>d :YcmCompleter GoTo<CR> 
-
 " Only show H1 headers. The other option is 'stacked' which shows all headers.
 let g:markdown_fold_style = 'nested'
 
@@ -292,6 +291,8 @@ let g:airline_theme="base16"
 
 map <leader>j :CtrlPMixed<CR>
 
-"let g:EclimCompletionMethod='omnifunc'
-"noremap <leader>s :JavaSearchContext<CR>
-
+" UltiSnips trigger configuration
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+ 
