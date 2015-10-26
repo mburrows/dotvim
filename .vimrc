@@ -21,6 +21,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
+Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 
 set nowrap               " turn off line wrapping, turn it back on with :Wrap
