@@ -7,7 +7,6 @@ call vundle#begin()
 Plugin 'Vundle/Vundle.vim'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
@@ -20,6 +19,8 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'benmills/vimux'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 
 set nowrap               " turn off line wrapping, turn it back on with :Wrap
@@ -290,6 +291,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme="base16"
 
+" Use Ctrl-P for file navigation
 map <leader>j :CtrlPMixed<CR>
 
 " UltiSnips trigger configuration
@@ -298,7 +300,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Vimux shortcuts
-map <Leader>vc :call VimuxRunCommand("clear; cd ~/cpp && ./waf debug -j48")<CR>
+map <Leader>vc :wa\|:VimuxRunCommand("clear; cd ~/cpp && ./waf debug -j48")<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vi :VimuxInspectRunner<CR>
