@@ -10,6 +10,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
@@ -18,9 +20,7 @@ Plugin 'vim-scripts/VisIncr'
 Plugin 'chriskempson/base16-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-fugitive'
 Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 
@@ -59,9 +59,8 @@ let mapleader=","
 " Turn on doxygen syntax highlighting (for C++ comments)
 let g:load_doxygen_syntax=1
 
-" Set completion (C-N/C-P) to scan current file, visible windows, hidden
-" buffers and then tags
-set complete=.,w,b,t
+" Add dictionary to completion set (but only if spelling is turned on)
+set complete=.,w,b,u,t,i,kspell
                                               
 " Make searching sane
 set ignorecase
@@ -130,9 +129,9 @@ if has("autocmd")
         " Avoid polluting buffer list with fugitive buffers
         autocmd BufReadPost fugitive://* set bufhidden=delete
 
-        " Use WAF for ECN builds
-        autocmd BufRead,BufNewFile **/ecn/**/*.cpp setlocal makeprg=~/cpp/waf tags+=~/cpp/tags
-        autocmd BufRead,BufNewFile **/ecn/**/*.h setlocal makeprg=~/cpp/waf tags+=~/cpp/tags
+        " Use WAF for ECN builds                              
+        autocmd BufRead,BufNewFile **/ecn/**/*.cpp setlocal makeprg=~/cpp/waf\ -j48\ -pp\ 2\>\&1\|\ egrep\ -v\ '^ICECC\|\ note:' tags+=~/cpp/tags
+        autocmd BufRead,BufNewFile **/ecn/**/*.h setlocal makeprg=~/cpp/waf\ -j48\ -pp\ 2\>\&1\|\ egrep\ -v\ '^ICECC\|\ note:' tags+=~/cpp/tags
         autocmd BufRead,BufNewFile **/ecn/**/*.py setlocal tags+=~/python/tags
         
         " Prefer // for C++ comments
@@ -166,20 +165,19 @@ endif " has("autocmd")
 " Remap esc key for fast switching and ipad keyboards
 inoremap jj <Esc>
 
-" Quick compile
-noremap <F1> :make debug -j48<CR>
-noremap <leader>1 :make debug -j48<CR>
+" Quick dispatches
+noremap <F1> :Make<CR>
+noremap <F2> :Dispatch<CR>
+noremap <F3> :Dispatch!<CR>
+noremap <F4> :cwin<CR>
 
 " Fast switching between .h and .cpp files
-noremap <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-noremap <leader>2 :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-nnoremap <leader>h :vsp %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+noremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " Use to turn off autoindenting when pasting from the clipboard
 set pastetoggle=<F5>
 
 " Rapidly switch between quicklist entries
-noremap <F8>  :cwin<CR>
 noremap <F9>  :cprev<CR>
 noremap <F10> :cnext<CR>
 noremap <F11> :cpf<CR>
@@ -193,12 +191,6 @@ nnoremap ,8 :exe ":Ggrep " . expand("<cword>")<CR>
 
 " Quickly edit the vimrc file
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
-
-" Easy window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
 
 " Write out as sudo with w!!
 cmap w!! w !sudo tee % >/dev/null
@@ -300,11 +292,3 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" Vimux shortcuts
-map <Leader>vc :wa\|:VimuxRunCommand("clear; cd ~/cpp && ./waf debug -j48")<CR>
-map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>vl :VimuxRunLastCommand<CR>
-map <Leader>vi :VimuxInspectRunner<CR>
-map <Leader>vq :VimuxCloseRunner<CR>
-map <Leader>vx :VimuxInterruptRunner<CR>
-map <Leader>vz :call VimuxZoomRunner()<CR>    
